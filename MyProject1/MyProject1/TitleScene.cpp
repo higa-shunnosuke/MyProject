@@ -69,7 +69,7 @@ void TitleScene_Update(void)
 		PlaySoundMem(sounds[E_TITLE_BGM], DX_PLAYTYPE_BACK, FALSE);
 	}*/
 
-	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE || CheckHitKey(KEY_INPUT_SPACE) == TRUE)
+	if (CheckHitKey(KEY_INPUT_SPACE) == TRUE)
 	{
 		StopSoundMem(sounds[E_TITLE_BGM]);
 		PlaySoundMem(sounds[E_TITLE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
@@ -79,21 +79,24 @@ void TitleScene_Update(void)
 			Change_Scene(E_GAMEMAIN);
 			break;
 		case 1:
-			Change_Scene(E_RANKING);
+			Change_Scene(E_HELP);
 			break;
 		case 2:
+			Change_Scene(E_CREDIT);
+			break;
+		case 3:
 		default:
 			Change_Scene(E_END);
 			break;
 		}
 	}
 
-	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
+	if (CheckHitKey(KEY_INPUT_UP) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
 		if (cursor_number <= 0)
 		{
-			cursor_number = 2;
+			cursor_number = 3;
 		}
 		else
 		{
@@ -102,10 +105,10 @@ void TitleScene_Update(void)
 		}
 	}
 
-	if (GetButtonDown(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
+	if (CheckHitKey(KEY_INPUT_DOWN) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-		if (cursor_number >= 2)
+		if (cursor_number >= 3)
 		{
 			cursor_number = 0;
 		}
@@ -125,23 +128,32 @@ void TitleScene_Update(void)
 void TitleScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawString(100, 100, "テトリス", GetColor(255, 255, 255));
+	DrawString(100, 100, "MyProject1", GetColor(255, 255, 255));
 	switch (cursor_number)
 	{
 	case 0:
 		DrawString(300, 300, "スタート", GetColor(0, 255, 0));
-		DrawString(300, 350, "ランキング", GetColor(255, 255, 255));
-		DrawString(300, 400, "エンド", GetColor(255, 255, 255));
+		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
 		break;
 	case 1:
 		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
-		DrawString(300, 350, "ランキング", GetColor(0, 255, 0));
-		DrawString(300, 400, "エンド", GetColor(255, 255, 255));
+		DrawString(300, 350, "ヘルプ", GetColor(0, 255, 0));
+		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
+		break;
+	case 2:
+		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
+		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(300, 400, "クレジット", GetColor(0, 255, 0));
+		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
 		break;
 	default:
 		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
-		DrawString(300, 350, "ランキング", GetColor(255, 255, 255));
-		DrawString(300, 400, "エンド", GetColor(0, 255, 0));
+		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(300, 450, "エンド", GetColor(0, 255, 0));
 		break;
 	}
 

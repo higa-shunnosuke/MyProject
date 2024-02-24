@@ -131,14 +131,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CreditScene.cpp" />
+    <ClCompile Include="EndScene.cpp" />
+    <ClCompile Include="GameMainScene.cpp" />
+    <ClCompile Include="GameoverScene.cpp" />
+    <ClCompile Include="HelpScene.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="FreamControl.cpp" />
+    <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Common.h" />
+    <ClInclude Include="CreditScene.h" />
+    <ClInclude Include="EndScene.h" />
     <ClInclude Include="FreamControl.h" />
+    <ClInclude Include="GameMainScene.h" />
+    <ClInclude Include="GameoverScene.h" />
+    <ClInclude Include="HelpScene.h" />
+    <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>

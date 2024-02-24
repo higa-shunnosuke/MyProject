@@ -1,6 +1,7 @@
 #include"DxLib.h"
 #include"Common.h"
 #include"FreamControl.h"
+#include"SceneManager.h"
 
 /***********************************************
  * プログラムの開始
@@ -13,17 +14,26 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	//タイトルを変更
 	SetMainWindowText("Profject1");
 
-	ChangeWindowMode(TRUE);		// ウィンドウモードで起動
+	// ウィンドウモードで起動
+	ChangeWindowMode(TRUE);
 
-	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOBIT);	//画面サイズの設定
+	//画面サイズの設定
+	SetGraphMode(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_COLOBIT);
 
-	if (DxLib_Init() == -1) return -1;	// DXライブラリの初期化処理
+	// DXライブラリの初期化処理
+	if (DxLib_Init() == -1) return -1;
 
 	//フレーム制御機能初期化処理
 	FreamControl_Initialize();
 
-	SetDrawScreen(DX_SCREEN_BACK);	// 描画先画面を裏にする
+	//シーン管理機能初期化処理
+	SceneManager_Initialize(E_TITLE);
 
+	// 描画先画面を裏にする
+	SetDrawScreen(DX_SCREEN_BACK);
+
+	//文字サイズを設定
+	SetFontSize(FONT_SIZE);
 
 	// ゲームループ
 	while ((ProcessMessage() == 0) && GetExitButton() != TRUE)
@@ -34,6 +44,11 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 		// 画面の初期化
 		ClearDrawScreen();
 
+		//シーン管理機能更新処理
+		SceneManager_Update();
+
+		//シーン管理機能描画処理
+		SceneManager_Draw();
 
 		// 裏画面の内容を表画面に反映
 		ScreenFlip();
