@@ -1,5 +1,6 @@
 #include "GameMainScene.h"
 #include "SceneManager.h"
+#include "InputControl.h"
 #include "DxLib.h"
 
 /****************************************************
@@ -37,9 +38,9 @@ int GameMainScene_Initialize(void)
 *****************************************************/
 void GameMainScene_Update(void)
 {
-	if (CheckHitKey(KEY_INPUT_Q) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_TITLE);
+		Change_Scene(E_STAGESELECT);
 	}
 }
 

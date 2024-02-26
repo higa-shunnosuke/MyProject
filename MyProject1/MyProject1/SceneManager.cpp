@@ -1,5 +1,6 @@
 #include "SceneManager.h"
 #include"TitleScene.h"
+#include"StageSelectScene.h"
 #include"HelpScene.h"
 #include"CreditScene.h"
 #include"GameMainScene.h"
@@ -39,6 +40,9 @@ void SceneManager_Initialize(GAME_MODE mode)
 	{
 	case E_TITLE:
 		read_error = TitleScene_Initialize();     //タイトル画面の初期化
+		break;
+	case E_STAGESELECT:
+		read_error = StageSelectScene_Initialize();     //ステージ選択画面の初期化
 		break;
 	case E_HELP:
 		read_error = HelpScene_Initialize();     //ヘルプ画面の初期化
@@ -83,6 +87,9 @@ void SceneManager_Update(void)
 	case E_TITLE:
 		TitleScene_Update();	//タイトル画面の更新
 		break;
+	case E_STAGESELECT:
+		StageSelectScene_Update();	//ステージ選択画面の更新
+		break;
 	case E_HELP:
 		HelpScene_Update();     //ヘルプ画面の更新
 		break;
@@ -117,6 +124,9 @@ void SceneManager_Draw(void)
 	{
 	case E_TITLE:
 		TitleScene_Draw();	//タイトル画面の描画
+		break;
+	case E_STAGESELECT:
+		StageSelectScene_Draw();	//ステージ選択画面の描画
 		break;
 	case E_HELP:
 		HelpScene_Draw();     //ヘルプ画面の描画

@@ -18,18 +18,3 @@
 #define SCREEN_UPPER (0)
 #define SCREEN_UNDER (720)
 
-/****************************************************
-*入力制御機能：ゲーム終了用のボタン判定処理
-* 引　数：無し
-* 戻り値：TRUE（押した）,FALSE（押してない)
-*****************************************************/
-int GetExitButton(void)
-{
-	int ret = FALSE;
-
-	if ((CheckHitKey(KEY_INPUT_ESCAPE) == TRUE))
-	{
-		ret = TRUE;
-	}
-	return ret;
-}

@@ -1,4 +1,5 @@
 #include "EndScene.h"
+#include "InputControl.h"
 #include"DxLib.h"
 
 /****************************************************
@@ -47,7 +48,8 @@ void EndScene_Update(void)
 *****************************************************/
 void EndScene_Draw(void)
 {
-	DrawString(10, 10, "ƒGƒ“ƒh‰æ–Ê‚Å‚·", GetColor(255, 255, 255));
+	SetFontSize(50);
+	DrawString(100, 100, "END", GetColor(255, 255, 255));
 }
 
 /****************************************************

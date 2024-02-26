@@ -1,5 +1,6 @@
 #include "HelpScene.h"
 #include "SceneManager.h"
+#include "InputControl.h"
 #include "DxLib.h"
 
 /****************************************************
@@ -37,7 +38,7 @@ int HelpScene_Initialize(void)
 *****************************************************/
 void HelpScene_Update(void)
 {
-	if (CheckHitKey(KEY_INPUT_Q) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
 		Change_Scene(E_TITLE);
 	}

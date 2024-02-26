@@ -136,10 +136,12 @@
     <ClCompile Include="GameMainScene.cpp" />
     <ClCompile Include="GameoverScene.cpp" />
     <ClCompile Include="HelpScene.cpp" />
+    <ClCompile Include="InputControl.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="FreamControl.cpp" />
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="StageSelectScene.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -150,8 +152,10 @@
     <ClInclude Include="GameMainScene.h" />
     <ClInclude Include="GameoverScene.h" />
     <ClInclude Include="HelpScene.h" />
+    <ClInclude Include="InputControl.h" />
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="StageSelectScene.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

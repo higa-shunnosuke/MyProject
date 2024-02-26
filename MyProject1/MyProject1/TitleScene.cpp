@@ -1,6 +1,8 @@
 #include "TitleScene.h"
 #include "SceneManager.h"
+#include"InputControl.h"
 #include "DxLib.h"
+
 
 /****************************************************
 *マクロ定義
@@ -20,8 +22,8 @@ enum
 /****************************************************
 *グローバル変数宣言
 *****************************************************/
-int cursor_number;
-int sounds[E_SOUND_MAX];
+static int cursor_number;
+static int sounds[E_SOUND_MAX];
 
 /****************************************************
 *プロトタイプ宣言
@@ -36,7 +38,7 @@ int TitleScene_Initialize(void)
 {
 	int ret = 0;
 
-	cursor_number = 0;
+	//cursor_number = 0;
 
 	sounds[E_TITLE_BGM] = LoadSoundMem("sounds/BGM041.ogg");
 	sounds[E_TITLE_SE_CURSOR] = LoadSoundMem("sounds/SE1.mp3");
@@ -69,14 +71,14 @@ void TitleScene_Update(void)
 		PlaySoundMem(sounds[E_TITLE_BGM], DX_PLAYTYPE_BACK, FALSE);
 	}*/
 
-	if (CheckHitKey(KEY_INPUT_SPACE) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
 	{
 		StopSoundMem(sounds[E_TITLE_BGM]);
 		PlaySoundMem(sounds[E_TITLE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
 		switch (cursor_number)
 		{
 		case 0:
-			Change_Scene(E_GAMEMAIN);
+			Change_Scene(E_STAGESELECT);
 			break;
 		case 1:
 			Change_Scene(E_HELP);
@@ -91,7 +93,7 @@ void TitleScene_Update(void)
 		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_UP) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_DPAD_UP) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
 		if (cursor_number <= 0)
@@ -105,7 +107,7 @@ void TitleScene_Update(void)
 		}
 	}
 
-	if (CheckHitKey(KEY_INPUT_DOWN) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
 	{
 		PlaySoundMem(sounds[E_TITLE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
 		if (cursor_number >= 3)
@@ -121,41 +123,41 @@ void TitleScene_Update(void)
 }
 
 /****************************************************
-*タイトル画面：初期化処理
+*タイトル画面：描画処理
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
 void TitleScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawString(100, 100, "MyProject1", GetColor(255, 255, 255));
+	DrawString(100, 100, "タイトル", GetColor(255, 255, 255));
 	switch (cursor_number)
 	{
 	case 0:
-		DrawString(300, 300, "スタート", GetColor(0, 255, 0));
-		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
-		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
-		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
+		DrawString(100, 300, "スタート", GetColor(0, 255, 0));
+		DrawString(100, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(100, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(100, 450, "エンド", GetColor(255, 255, 255));
 		break;
 	case 1:
-		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
-		DrawString(300, 350, "ヘルプ", GetColor(0, 255, 0));
-		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
-		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
+		DrawString(100, 300, "スタート", GetColor(255, 255, 255));
+		DrawString(100, 350, "ヘルプ", GetColor(0, 255, 0));
+		DrawString(100, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(100, 450, "エンド", GetColor(255, 255, 255));
 		break;
 	case 2:
-		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
-		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
-		DrawString(300, 400, "クレジット", GetColor(0, 255, 0));
-		DrawString(300, 450, "エンド", GetColor(255, 255, 255));
+		DrawString(100, 300, "スタート", GetColor(255, 255, 255));
+		DrawString(100, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(100, 400, "クレジット", GetColor(0, 255, 0));
+		DrawString(100, 450, "エンド", GetColor(255, 255, 255));
 		break;
 	default:
-		DrawString(300, 300, "スタート", GetColor(255, 255, 255));
-		DrawString(300, 350, "ヘルプ", GetColor(255, 255, 255));
-		DrawString(300, 400, "クレジット", GetColor(255, 255, 255));
-		DrawString(300, 450, "エンド", GetColor(0, 255, 0));
+		DrawString(100, 300, "スタート", GetColor(255, 255, 255));
+		DrawString(100, 350, "ヘルプ", GetColor(255, 255, 255));
+		DrawString(100, 400, "クレジット", GetColor(255, 255, 255));
+		DrawString(100, 450, "エンド", GetColor(0, 255, 0));
 		break;
 	}
 
-	DrawTriangle(260, 310 + (cursor_number * 50), 260, 340 + (cursor_number * 50), 290, 325 + (cursor_number * 50), GetColor(0, 255, 0), TRUE);
+	DrawTriangle(60, 310 + (cursor_number * 50), 60, 340 + (cursor_number * 50), 90, 325 + (cursor_number * 50), GetColor(0, 255, 0), TRUE);
 }

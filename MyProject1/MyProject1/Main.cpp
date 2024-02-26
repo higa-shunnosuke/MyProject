@@ -2,12 +2,14 @@
 #include"Common.h"
 #include"FreamControl.h"
 #include"SceneManager.h"
+#include"InputControl.h"
+
 
 /***********************************************
  * プログラムの開始
  ***********************************************/
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-	LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance,
+	_In_ LPSTR lpCmdLine, _In_ int nShowCmd)
 {
 	double dNextTime = GetNowCount();
 
@@ -32,6 +34,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 	// 描画先画面を裏にする
 	SetDrawScreen(DX_SCREEN_BACK);
 
+	//入力制御管理機能初期化処理
+	InputControl_Initialize();
+
 	//文字サイズを設定
 	SetFontSize(FONT_SIZE);
 
@@ -43,6 +48,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
 
 		// 画面の初期化
 		ClearDrawScreen();
+
+		//入力制御機能更新処理
+		InputControl_Update();
 
 		//シーン管理機能更新処理
 		SceneManager_Update();
