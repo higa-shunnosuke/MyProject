@@ -4,6 +4,7 @@
 #include"HelpScene.h"
 #include"CreditScene.h"
 #include"GameMainScene.h"
+#include"PauseScene.h"
 #include"ResultScene.h"
 #include"GameoverScene.h"
 #include"EndScene.h"
@@ -23,6 +24,7 @@
 GAME_MODE game_mode;     //ゲームモード情報
 GAME_MODE next_mode;     //次のゲームモード
 int read_error;     //読み込みエラー確認
+static int stage_number;	//ステージナンバー
 
 /****************************************************
 *プロトタイプ宣言
@@ -52,6 +54,9 @@ void SceneManager_Initialize(GAME_MODE mode)
 		break;
 	case E_GAMEMAIN:
 		read_error = GameMainScene_Initialize();     //ゲームメイン画面の初期化
+		break;
+	case E_PAUSE:
+		read_error = PauseScene_Initialize();     //ポーズ画面の初期化
 		break;
 	case E_RESULT:
 		read_error = ResultScene_Initialize();     //リザルト画面の初期化
@@ -97,7 +102,10 @@ void SceneManager_Update(void)
 		CreditScene_Update();     //クレジット画面の更新
 		break;
 	case E_GAMEMAIN:
-		GameMainScene_Update();	//ゲームメイン画面の更新
+		GameMainScene_Update(stage_number);	//ゲームメイン画面の更新
+		break;
+	case E_PAUSE:
+		PauseScene_Update();	//ポーズ画面の更新
 		break;
 	case E_RESULT:
 		ResultScene_Update();     //リザルト画面の更新
@@ -137,6 +145,10 @@ void SceneManager_Draw(void)
 	case E_GAMEMAIN:
 		GameMainScene_Draw();	//ゲームメイン画面の描画
 		break;
+	case E_PAUSE:
+		GameMainScene_Draw();	//ゲームメイン画面の描画
+		PauseScene_Draw();	//ポーズ画面の描画
+		break;
 	case E_RESULT:
 		ResultScene_Draw();     //リザルト画面の描画
 		break;
@@ -155,9 +167,13 @@ void SceneManager_Draw(void)
 * 引　数：変更するゲームモード
 * 戻り値：なし
 *****************************************************/
-void Change_Scene(GAME_MODE mode)
+void Change_Scene(GAME_MODE mode,int s_n)
 {
 	next_mode = mode;
+	if (s_n>0)
+	{
+		stage_number = s_n;
+	}
 }
 
 /****************************************************

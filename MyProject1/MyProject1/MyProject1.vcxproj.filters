@@ -1,93 +1,112 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ソース ファイル">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="Object">
+      <UniqueIdentifier>{f2b7dab9-2900-4583-8279-61fb29ce7235}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{6167276f-6127-4dc9-872e-b03f51e4f8cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="リソース ファイル">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{660f2b08-bc32-4736-b234-a32330dbcbbf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="FreamControl.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="CreditScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="EndScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameMainScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="GameoverScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="HelpScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="ResultScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="InputControl.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="StageSelectScene.cpp">
-      <Filter>ソース ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="InputControl.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="FreamControl.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Collinder.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FreamControl.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="Common.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="CreditScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="EndScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameMainScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="GameoverScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="HelpScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="GameoverScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ResultScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="InputControl.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="StageSelectScene.h">
-      <Filter>ヘッダー ファイル</Filter>
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="InputControl.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="FreamControl.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Common.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Collinder.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

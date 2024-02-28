@@ -1,14 +1,12 @@
-#include "GameMainScene.h"
+#include "PauseScene.h"
 #include "SceneManager.h"
 #include "InputControl.h"
 #include "DxLib.h"
-#include "Common.h"
-#include "Player.h"
 
 /****************************************************
 *マクロ定義
 *****************************************************/
-#define WALL (50)
+
 /****************************************************
 *型定義
 *****************************************************/
@@ -16,8 +14,7 @@
 /****************************************************
 *グローバル変数宣言
 *****************************************************/
-static int stage_number;
-Player* player = new Player;
+
 /****************************************************
 *プロトタイプ宣言
 *****************************************************/
@@ -27,7 +24,7 @@ Player* player = new Player;
 * 引　数：なし
 * 戻り値：エラー情報（-1;異常有-1以外;正常終了）
 *****************************************************/
-int GameMainScene_Initialize(void)
+int PauseScene_Initialize(void)
 {
 	int ret = 0;
 
@@ -39,19 +36,11 @@ int GameMainScene_Initialize(void)
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
-void GameMainScene_Update(int s_n)
+void PauseScene_Update(void)
 {
-	player->PlayerUpdate();
-
-	stage_number = s_n;
-
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_STAGESELECT,0);
-	}
-	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
-	{
-		Change_Scene(E_PAUSE,0);
+		Change_Scene(E_GAMEMAIN, 0);
 	}
 }
 
@@ -60,12 +49,8 @@ void GameMainScene_Update(int s_n)
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
-void GameMainScene_Draw(void)
+void PauseScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawBox(0,0,SCREEN_WIDTH, SCREEN_HEIGHT,0xffffff,true);
-	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
-	DrawFormatString(0, 0, 0x0,"ステージ%d", stage_number);
-	player->PlayerDraw();
-
+	DrawString(100, 100, "PAUSE", GetColor(255, 255, 255));
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Player.h"
-
 /********************************
 *マクロ定義
 *********************************/
@@ -13,8 +11,7 @@
 /********************************
 *プロトタイプ宣言
 *********************************/
-int GameMainScene_Initialize(void);
-void GameMainScene_Update(int s_n);
-void GameMainScene_Draw(void);
+int PauseScene_Initialize(void);
+void PauseScene_Update(void);
+void PauseScene_Draw(void);
 
-int Get_Score(void);

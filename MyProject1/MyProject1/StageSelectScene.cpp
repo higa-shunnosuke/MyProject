@@ -22,7 +22,7 @@ enum
 /****************************************************
 *グローバル変数宣言
 *****************************************************/
-static int cursor_number;
+static int stage_number=1;
 static int sounds[E_SOUND_MAX];
 
 /****************************************************
@@ -76,20 +76,20 @@ void StageSelectScene_Update(void)
 		//StopSoundMem(sounds[E_STAGE_BGM]);
 		PlaySoundMem(sounds[E_STAGE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
 		
-		Change_Scene(E_GAMEMAIN);
+		Change_Scene(E_GAMEMAIN,stage_number);
 
 	}
 
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_LEFT) == TRUE)
 	{
 		PlaySoundMem(sounds[E_STAGE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-		if (cursor_number <= 0)
+		if (stage_number <= 1)
 		{
-			cursor_number = 0;
+			stage_number = 1;
 		}
 		else
 		{
-			cursor_number--;
+			stage_number--;
 
 		}
 	}
@@ -97,20 +97,20 @@ void StageSelectScene_Update(void)
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_RIGHT) == TRUE)
 	{
 		PlaySoundMem(sounds[E_STAGE_SE_CURSOR], DX_PLAYTYPE_NORMAL, FALSE);
-		if (cursor_number >= 7)
+		if (stage_number >= 8)
 		{
-			cursor_number = 0;
+			stage_number = 8;
 		}
 		else
 		{
-			cursor_number++;
+			stage_number++;
 
 		}
 	}
 
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_TITLE);
+		Change_Scene(E_TITLE,0);
 	}
 }
 
@@ -122,7 +122,5 @@ void StageSelectScene_Update(void)
 void StageSelectScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "ステージ%d", cursor_number + 1);
-	
-	//DrawTriangle(60, 310 + (cursor_number * 50), 60, 340 + (cursor_number * 50), 90, 325 + (cursor_number * 50), GetColor(0, 255, 0), TRUE);
+	DrawFormatString(100, 100, GetColor(255, 255, 255), "ステージ%d", stage_number);
 }
