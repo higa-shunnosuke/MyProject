@@ -42,6 +42,10 @@ void PauseScene_Update(void)
 	{
 		Change_Scene(E_GAMEMAIN, 0);
 	}
+	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
+	{
+		Change_Scene(E_STAGESELECT, 0);
+	}
 }
 
 /****************************************************

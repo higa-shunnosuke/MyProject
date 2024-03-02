@@ -3,68 +3,76 @@
 #include "math.h"
 #include "Common.h"
 #include "InputControl.h"
+#include "Bullet.h"
 
-//コンストラクタ
-Player::Player()
+
+float PlayerX;     //バレットのX座標
+float PlayerY;     //バレットのY座標
+float PlayerR;     //バレットの半径
+double Radian;			//ラジアン
+double Degree;			//角度
+bool Is_Bullet;			//バレットを生成可能か？
+
+//初期化処理
+void Player_Initialize()
 {
-	location.x = 640.0f;
-	location.y = 480.0f;
-	area.height = 50.0f;
-	area.width = 50.0f;
-	Degree = 0;
-	Radian = 0;
-	playerBullet = nullptr;
+	PlayerX=640.0f;
+	PlayerY=480.0f;
+	PlayerR = 25.0f;
+	Is_Bullet = true;
+
+	//バレット初期化処理
+	Bullet_Initialize(PlayerX, PlayerY);
 }
 
-//デストラクタ
-Player::~Player() {}
-
 //プレイヤー更新処理
-void Player::PlayerUpdate()
+void Player_Update()
 {
 
-	Bullet_Control();
+	Player_Control();
 
-	if (CheckHitKey(KEY_INPUT_SPACE) != 0)
+	//バレット発射
+	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
 	{
-		if (playerBullet == nullptr)
-		{
-			playerBullet = new Bullet(location.x, location.y, Radian);
-		}
+		SetBullet(false);
 	}
 
-	if (playerBullet != nullptr)
+	//バレット更新処理
+	if (Is_Bullet==false)
 	{
-		playerBullet->Bullet_Update();
+		Bullet_Update(Radian);
+	}
 
-		if (5 <= playerBullet->ReflectionCount)
-		{
-			playerBullet->ReflectionCount = 0;
-			delete playerBullet;
-			playerBullet = nullptr;
-		}
+	//バレット初期化処理
+	if (GetBRC() > 5)
+	{
+		Is_Bullet = true;
+
+		Bullet_Initialize(PlayerX, PlayerY);
 	}
 }
 
 //プレイヤー描画処理
-void Player::PlayerDraw() const
+void Player_Draw()
 {
-	if (playerBullet != nullptr)
+	//バレット描画処理
+	if (Is_Bullet == false)
 	{
-		playerBullet->Bullet_Draw();
+		Bullet_Draw();
 	}
 
-	DrawCircleAA(location.x, location.y, 25, 100, 0xffffff, TRUE);
+	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
 	DrawFormatString(450, 100, GetColor(255, 255, 255), "θ ：%f", Degree);
 	DrawFormatString(450, 150, GetColor(255, 255, 255), "cos：%f", cos(Radian));
 	DrawFormatString(450, 200, GetColor(255, 255, 255), "sin：%f", sin(Radian));
 	DrawFormatString(450, 250, GetColor(255, 255, 255), "rad：%f", Radian);
+	DrawFormatString(450, 300, GetColor(255, 255, 255), "flg：%d", Is_Bullet);
 }
 
 
-void Player::Bullet_Control()
+void Player_Control()
 {
-	if (CheckHitKey(KEY_INPUT_W) != 0)
+	if (GetButton(XINPUT_BUTTON_DPAD_UP) == TRUE && Is_Bullet==true)
 	{
 		if (Degree >= 360)
 		{
@@ -75,7 +83,7 @@ void Player::Bullet_Control()
 			Degree++;
 		}
 	}
-	if (CheckHitKey(KEY_INPUT_S) != 0)
+	if (GetButton(XINPUT_BUTTON_DPAD_DOWN) == TRUE && Is_Bullet==true)
 	{
 		if (Degree <= 0)
 		{
@@ -87,4 +95,11 @@ void Player::Bullet_Control()
 		}
 	}
 	Radian = Degree * (M_PI / 180);
+}
+
+//バレットフラグ設定処理(true=撃てる,false=撃てない)
+void SetBullet(bool flg)
+{
+	Is_Bullet = flg;
+
 }

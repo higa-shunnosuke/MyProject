@@ -1,27 +1,9 @@
 #pragma once
 
-#include"Collinder.h"
+void Bullet_Initialize(float x, float y);     //初期化処理
+void Bullet_Update(double r);     //更新処理
+void Bullet_Draw();	//描画処理
+void Bullet_Vector(double  Degree);     //移動処理
+int GetBRC();	//反射回数取得処理
 
-class Bullet:public Collinder
-{
-public:
-	double BulletSpeedX;     //バレットのX座標移動距離
-	double BulletSpeedY;     //バレットのY座標移動距離
-	unsigned int BulletColor;     //バレットの色
-	double Radian;			//ラジアン
-	int ReflectionCount;	//反射回数
-
-	//コンストラクタ定義
-	Bullet(double PlayerX, double PlayerY, double Radian);
-	//デストラクタ定義
-	~Bullet();
-
-	void Bullet_Update();     //更新処理
-	void Bullet_Draw() const;	//描画処理
-	
-
-private:
-	void Bullet_Vector();     //移動処理
-
-};
 

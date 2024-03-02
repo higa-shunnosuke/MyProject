@@ -17,7 +17,6 @@
 *グローバル変数宣言
 *****************************************************/
 static int stage_number;
-Player* player = new Player;
 /****************************************************
 *プロトタイプ宣言
 *****************************************************/
@@ -29,6 +28,8 @@ Player* player = new Player;
 *****************************************************/
 int GameMainScene_Initialize(void)
 {
+		Player_Initialize();
+	
 	int ret = 0;
 
 	return ret;
@@ -41,14 +42,10 @@ int GameMainScene_Initialize(void)
 *****************************************************/
 void GameMainScene_Update(int s_n)
 {
-	player->PlayerUpdate();
+	Player_Update();
 
 	stage_number = s_n;
 
-	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
-	{
-		Change_Scene(E_STAGESELECT,0);
-	}
 	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
 	{
 		Change_Scene(E_PAUSE,0);
@@ -66,6 +63,6 @@ void GameMainScene_Draw(void)
 	DrawBox(0,0,SCREEN_WIDTH, SCREEN_HEIGHT,0xffffff,true);
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
 	DrawFormatString(0, 0, 0x0,"ステージ%d", stage_number);
-	player->PlayerDraw();
+	Player_Draw();
 
 }
