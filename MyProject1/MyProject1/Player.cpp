@@ -6,12 +6,13 @@
 #include "Bullet.h"
 
 
-float PlayerX;     //バレットのX座標
-float PlayerY;     //バレットのY座標
-float PlayerR;     //バレットの半径
-double Radian;			//ラジアン
-double Degree;			//角度
-bool Is_Bullet;			//バレットを生成可能か？
+float PlayerX;		//バレットのX座標
+float PlayerY;		//バレットのY座標
+float PlayerR;		//バレットの半径
+double Radian;		//ラジアン
+double Degree;		//角度
+bool Is_Bullet;		//バレットを生成可能か？
+int type;			//弾のタイプ
 
 //初期化処理
 void Player_Initialize()
@@ -20,6 +21,7 @@ void Player_Initialize()
 	PlayerY=480.0f;
 	PlayerR = 25.0f;
 	Is_Bullet = true;
+	type = 1;
 
 	//バレット初期化処理
 	Bullet_Initialize(PlayerX, PlayerY);
@@ -31,16 +33,40 @@ void Player_Update()
 
 	Player_Control();
 
+	//タイプ変更
+	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE)
+	{
+		if (type>1)
+		{
+			type--;
+		}
+		/*else
+		{
+			type = 3;
+		}*/
+	}
+	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE)
+	{
+		if (type < 3)
+		{
+			type++;
+		}
+		/*else
+		{
+			type = 1;
+		}*/
+	}
+
 	//バレット発射
 	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
 	{
 		SetBullet(false);
 	}
-
+	
 	//バレット更新処理
 	if (Is_Bullet==false)
 	{
-		Bullet_Update(Radian);
+		Bullet_Update(Radian,type);
 	}
 
 	//バレット初期化処理
@@ -58,7 +84,7 @@ void Player_Draw()
 	//バレット描画処理
 	if (Is_Bullet == false)
 	{
-		Bullet_Draw();
+		Bullet_Draw(type);
 	}
 
 	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
@@ -67,6 +93,7 @@ void Player_Draw()
 	DrawFormatString(450, 200, GetColor(255, 255, 255), "sin：%f", sin(Radian));
 	DrawFormatString(450, 250, GetColor(255, 255, 255), "rad：%f", Radian);
 	DrawFormatString(450, 300, GetColor(255, 255, 255), "flg：%d", Is_Bullet);
+	DrawFormatString(450, 350, GetColor(255, 255, 255), "type：%d", type);
 }
 
 
