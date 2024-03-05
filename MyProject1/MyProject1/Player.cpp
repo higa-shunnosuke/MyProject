@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "InputControl.h"
 #include "Bullet.h"
+#include"StageSelectScene.h"
 
 
 float PlayerX;		//バレットのX座標
@@ -17,12 +18,56 @@ int type;			//弾のタイプ
 //初期化処理
 void Player_Initialize()
 {
-	PlayerX=640.0f;
-	PlayerY=480.0f;
+	switch (GetStageNum())
+	{
+	case 1:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 2:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 3:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 4:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 5:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 6:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 7:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	case 8:
+		PlayerX = 300.0f;
+		PlayerY = 645.0f;
+
+		break;
+	default:
+		break;
+	}
+	
 	PlayerR = 25.0f;
+	Degree = 0.0f;
 	Is_Bullet = true;
 	type = 1;
-
 	//バレット初期化処理
 	Bullet_Initialize(PlayerX, PlayerY);
 }
@@ -39,6 +84,8 @@ void Player_Update()
 		if (type>1)
 		{
 			type--;
+			//バレット初期化処理
+			Bullet_Initialize(PlayerX, PlayerY);
 		}
 		/*else
 		{
@@ -47,15 +94,18 @@ void Player_Update()
 	}
 	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE)
 	{
-		if (type < 3)
+		if (type < 2)
 		{
 			type++;
+			//バレット初期化処理
+			Bullet_Initialize(PlayerX, PlayerY);
 		}
 		/*else
 		{
 			type = 1;
 		}*/
 	}
+
 
 	//バレット発射
 	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
@@ -66,7 +116,7 @@ void Player_Update()
 	//バレット更新処理
 	if (Is_Bullet==false)
 	{
-		Bullet_Update(Radian,type);
+		Bullet_Update(Radian);
 	}
 
 	//バレット初期化処理
@@ -74,6 +124,7 @@ void Player_Update()
 	{
 		Is_Bullet = true;
 
+		//バレット初期化処理
 		Bullet_Initialize(PlayerX, PlayerY);
 	}
 }
@@ -84,7 +135,7 @@ void Player_Draw()
 	//バレット描画処理
 	if (Is_Bullet == false)
 	{
-		Bullet_Draw(type);
+		Bullet_Draw();
 	}
 
 	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
@@ -94,6 +145,7 @@ void Player_Draw()
 	DrawFormatString(450, 250, GetColor(255, 255, 255), "rad：%f", Radian);
 	DrawFormatString(450, 300, GetColor(255, 255, 255), "flg：%d", Is_Bullet);
 	DrawFormatString(450, 350, GetColor(255, 255, 255), "type：%d", type);
+	DrawFormatString(450, 400, GetColor(255, 255, 255), "y：%f", PlayerY);
 }
 
 
@@ -129,4 +181,10 @@ void SetBullet(bool flg)
 {
 	Is_Bullet = flg;
 
+}
+
+//タイプ取得処理
+int GetType()
+{
+	return type;
 }

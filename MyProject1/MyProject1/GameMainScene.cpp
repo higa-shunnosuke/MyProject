@@ -1,9 +1,10 @@
 #include "GameMainScene.h"
+#include "StageSelectScene.h"
 #include "SceneManager.h"
 #include "InputControl.h"
-#include "DxLib.h"
 #include "Common.h"
 #include "Player.h"
+#include "DxLib.h"
 
 /****************************************************
 *マクロ定義
@@ -26,7 +27,7 @@ static int stage_number;
 * 引　数：なし
 * 戻り値：エラー情報（-1;異常有-1以外;正常終了）
 *****************************************************/
-int GameMainScene_Initialize(void)
+int GameMainScene_Initialize()
 {
 		Player_Initialize();
 	
@@ -40,15 +41,13 @@ int GameMainScene_Initialize(void)
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
-void GameMainScene_Update(int s_n)
+void GameMainScene_Update()
 {
 	Player_Update();
 
-	stage_number = s_n;
-
 	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
 	{
-		Change_Scene(E_PAUSE,0);
+		Change_Scene(E_PAUSE);
 	}
 }
 
@@ -57,12 +56,12 @@ void GameMainScene_Update(int s_n)
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
-void GameMainScene_Draw(void)
+void GameMainScene_Draw()
 {
 	SetFontSize(50);
 	DrawBox(0,0,SCREEN_WIDTH, SCREEN_HEIGHT,0xffffff,true);
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
-	DrawFormatString(0, 0, 0x0,"ステージ%d", stage_number);
+	DrawFormatString(0, 0, 0x0,"ステージ%d", GetStageNum());
 	Player_Draw();
 
 }

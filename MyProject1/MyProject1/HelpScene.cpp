@@ -40,7 +40,7 @@ void HelpScene_Update(void)
 {
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_TITLE,0);
+		Change_Scene(E_TITLE);
 	}
 }
 

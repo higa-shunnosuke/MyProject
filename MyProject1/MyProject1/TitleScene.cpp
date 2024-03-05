@@ -78,17 +78,17 @@ void TitleScene_Update(void)
 		switch (cursor_number)
 		{
 		case 0:
-			Change_Scene(E_STAGESELECT,0);
+			Change_Scene(E_STAGESELECT);
 			break;
 		case 1:
-			Change_Scene(E_HELP,0);
+			Change_Scene(E_HELP);
 			break;
 		case 2:
-			Change_Scene(E_CREDIT,0);
+			Change_Scene(E_CREDIT);
 			break;
 		case 3:
 		default:
-			Change_Scene(E_END,0);
+			Change_Scene(E_END);
 			break;
 		}
 	}

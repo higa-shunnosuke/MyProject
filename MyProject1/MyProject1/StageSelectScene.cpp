@@ -76,7 +76,7 @@ void StageSelectScene_Update(void)
 		//StopSoundMem(sounds[E_STAGE_BGM]);
 		PlaySoundMem(sounds[E_STAGE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
 		
-		Change_Scene(E_GAMEMAIN,stage_number);
+		Change_Scene(E_GAMEMAIN);
 
 	}
 
@@ -110,7 +110,7 @@ void StageSelectScene_Update(void)
 
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_TITLE,0);
+		Change_Scene(E_TITLE);
 	}
 }
 
@@ -123,4 +123,9 @@ void StageSelectScene_Draw(void)
 {
 	SetFontSize(50);
 	DrawFormatString(100, 100, GetColor(255, 255, 255), "ステージ%d", stage_number);
+}
+
+int GetStageNum()
+{
+	return stage_number;
 }

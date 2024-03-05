@@ -38,13 +38,17 @@ int PauseScene_Initialize(void)
 *****************************************************/
 void PauseScene_Update(void)
 {
+	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
+	{
+		Change_Scene(E_GAMEMAIN);
+	}
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
 	{
-		Change_Scene(E_GAMEMAIN, 0);
+		Change_Scene(E_GAMEMAIN);
 	}
 	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
 	{
-		Change_Scene(E_STAGESELECT, 0);
+		Change_Scene(E_STAGESELECT);
 	}
 }
 

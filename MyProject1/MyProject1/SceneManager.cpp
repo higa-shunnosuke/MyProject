@@ -102,7 +102,7 @@ void SceneManager_Update(void)
 		CreditScene_Update();     //クレジット画面の更新
 		break;
 	case E_GAMEMAIN:
-		GameMainScene_Update(stage_number);	//ゲームメイン画面の更新
+		GameMainScene_Update();	//ゲームメイン画面の更新
 		break;
 	case E_PAUSE:
 		PauseScene_Update();	//ポーズ画面の更新
@@ -167,13 +167,9 @@ void SceneManager_Draw(void)
 * 引　数：変更するゲームモード
 * 戻り値：なし
 *****************************************************/
-void Change_Scene(GAME_MODE mode,int s_n)
+void Change_Scene(GAME_MODE mode)
 {
 	next_mode = mode;
-	if (s_n>0)
-	{
-		stage_number = s_n;
-	}
 }
 
 /****************************************************
