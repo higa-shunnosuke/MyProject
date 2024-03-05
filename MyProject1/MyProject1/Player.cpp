@@ -7,9 +7,9 @@
 #include"StageSelectScene.h"
 
 
-float PlayerX;		//バレットのX座標
-float PlayerY;		//バレットのY座標
-float PlayerR;		//バレットの半径
+float PlayerX;		//プレイヤーのX座標
+float PlayerY;		//プレイヤーのY座標
+float PlayerR;		//プレイヤーの半径
 double Radian;		//ラジアン
 double Degree;		//角度
 bool Is_Bullet;		//バレットを生成可能か？
@@ -79,31 +79,31 @@ void Player_Update()
 	Player_Control();
 
 	//タイプ変更
-	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE && Is_Bullet == TRUE)
 	{
 		if (type>1)
 		{
 			type--;
-			//バレット初期化処理
-			Bullet_Initialize(PlayerX, PlayerY);
 		}
-		/*else
+		else
 		{
-			type = 3;
-		}*/
+			type = 2;
+		}
+		//バレット初期化処理
+		Bullet_Initialize(PlayerX, PlayerY);
 	}
-	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE && Is_Bullet == TRUE)
 	{
 		if (type < 2)
 		{
 			type++;
-			//バレット初期化処理
-			Bullet_Initialize(PlayerX, PlayerY);
 		}
-		/*else
+		else
 		{
 			type = 1;
-		}*/
+		}
+		//バレット初期化処理
+		Bullet_Initialize(PlayerX, PlayerY);
 	}
 
 
@@ -133,7 +133,7 @@ void Player_Update()
 void Player_Draw()
 {
 	//バレット描画処理
-	if (Is_Bullet == false)
+	if (Is_Bullet == false /*&& DeletCheck() == false*/)
 	{
 		Bullet_Draw();
 	}

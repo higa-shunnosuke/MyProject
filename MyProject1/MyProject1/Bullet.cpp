@@ -1,4 +1,5 @@
 #include "Common.h"
+#include "Collinder.h"
 #include "Bullet.h"
 #include "Player.h"
 #include "DxLib.h"
@@ -13,6 +14,7 @@ float BulletSpeedY;     //バレットのY座標移動距離
 float g;				//重力
 unsigned int BulletColor;     //バレットの色
 int ReflectionCount;	//反射回数
+bool Is_Delet;		//消滅フラグ
 
 //初期化処理
 void Bullet_Initialize(float x, float y)
@@ -22,6 +24,7 @@ void Bullet_Initialize(float x, float y)
 	BulletR = 20.0f;
 	g = 1.0f;
 	ReflectionCount = 0;	//反射回数
+	Is_Delet = false;
 
 	switch (GetType())
 	{
@@ -32,8 +35,8 @@ void Bullet_Initialize(float x, float y)
 		break;
 
 	case 2:
-		BulletSpeedX = 30.0f;
-		BulletSpeedY = 30.0f;
+		BulletSpeedX = 20.0f;
+		BulletSpeedY = 20.0f;
 		BulletColor = 0xff;     //バレットの色
 		break;
 	default:
@@ -47,6 +50,7 @@ void Bullet_Update(double r)
 {
 	
 	Bullet_Vector(r);
+	DeletCheck();
 
 	switch (GetType())
 	{
@@ -75,7 +79,7 @@ void Bullet_Update(double r)
 		break;
 	case 2:
 		//反射処理
-		if (BulletX + BulletR > SCREEN_RIGHT)
+		if (BulletX + BulletR >= SCREEN_RIGHT)
 		{
 			ReflectionCount=6;
 		}
@@ -119,4 +123,31 @@ void Bullet_Vector(double Radian)
 int GetBRC()
 {
 	return ReflectionCount;
+}
+
+float GetBulletX()
+{
+	return BulletX;
+}
+float GetBulletY()
+{
+	return BulletY;
+}
+float GetBulletR()
+{
+	return BulletR;
+}
+
+bool DeletCheck()
+{
+	if (HitCheck())
+	{
+		Is_Delet = true;
+	}
+	return Is_Delet;
+}
+
+void Delet()
+{
+
 }

@@ -4,6 +4,8 @@
 #include "InputControl.h"
 #include "Common.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Collinder.h"
 #include "DxLib.h"
 
 /****************************************************
@@ -30,6 +32,7 @@ static int stage_number;
 int GameMainScene_Initialize()
 {
 		Player_Initialize();
+		Enemy_Initialize();
 	
 	int ret = 0;
 
@@ -44,6 +47,7 @@ int GameMainScene_Initialize()
 void GameMainScene_Update()
 {
 	Player_Update();
+	Enemy_Update();
 
 	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
 	{
@@ -63,5 +67,9 @@ void GameMainScene_Draw()
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
 	DrawFormatString(0, 0, 0x0,"ステージ%d", GetStageNum());
 	Player_Draw();
+	if (DethCheck()==false)
+	{
+		Enemy_Draw();
+	}
 
 }
