@@ -69,7 +69,7 @@ void Player_Initialize()
 	Is_Bullet = true;
 	type = 1;
 	//バレット初期化処理
-	Bullet_Initialize(PlayerX, PlayerY);
+	Bullet_Initialize();
 }
 
 //プレイヤー更新処理
@@ -79,7 +79,7 @@ void Player_Update()
 	Player_Control();
 
 	//タイプ変更
-	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE && Is_Bullet == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE && Is_Bullet == true)
 	{
 		if (type>1)
 		{
@@ -89,10 +89,8 @@ void Player_Update()
 		{
 			type = 2;
 		}
-		//バレット初期化処理
-		Bullet_Initialize(PlayerX, PlayerY);
 	}
-	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE && Is_Bullet == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE && Is_Bullet == true)
 	{
 		if (type < 2)
 		{
@@ -102,15 +100,14 @@ void Player_Update()
 		{
 			type = 1;
 		}
-		//バレット初期化処理
-		Bullet_Initialize(PlayerX, PlayerY);
 	}
 
-
 	//バレット発射
-	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
+	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE && Is_Bullet == true)
 	{
 		SetBullet(false);
+		//バレット初期化処理
+		Bullet_Initialize();
 	}
 	
 	//バレット更新処理
@@ -119,13 +116,17 @@ void Player_Update()
 		Bullet_Update(Radian);
 	}
 
-	//バレット初期化処理
+	//バレットが5回反射したら消える
 	if (GetBRC() > 5)
 	{
-		Is_Bullet = true;
+		SetBullet(true);
 
 		//バレット初期化処理
-		Bullet_Initialize(PlayerX, PlayerY);
+		Bullet_Initialize();
+	}
+	else if (GetDelet()==true)
+	{
+		SetBullet(true);
 	}
 }
 
@@ -133,10 +134,7 @@ void Player_Update()
 void Player_Draw()
 {
 	//バレット描画処理
-	if (Is_Bullet == false /*&& DeletCheck() == false*/)
-	{
-		Bullet_Draw();
-	}
+	Bullet_Draw();
 
 	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
 	DrawFormatString(450, 100, GetColor(255, 255, 255), "θ ：%f", Degree);
@@ -145,7 +143,6 @@ void Player_Draw()
 	DrawFormatString(450, 250, GetColor(255, 255, 255), "rad：%f", Radian);
 	DrawFormatString(450, 300, GetColor(255, 255, 255), "flg：%d", Is_Bullet);
 	DrawFormatString(450, 350, GetColor(255, 255, 255), "type：%d", type);
-	DrawFormatString(450, 400, GetColor(255, 255, 255), "y：%f", PlayerY);
 }
 
 
@@ -187,4 +184,17 @@ void SetBullet(bool flg)
 int GetType()
 {
 	return type;
+}
+
+float GetPlayerX()
+{
+	return PlayerX;
+}
+float GetPlayerY()
+{
+	return PlayerY;
+}
+float GetPlayerR()
+{
+	return PlayerR;
 }

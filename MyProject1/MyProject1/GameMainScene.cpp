@@ -67,9 +67,6 @@ void GameMainScene_Draw()
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
 	DrawFormatString(0, 0, 0x0,"ステージ%d", GetStageNum());
 	Player_Draw();
-	if (DethCheck()==false)
-	{
-		Enemy_Draw();
-	}
+	Enemy_Draw();
 
 }

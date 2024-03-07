@@ -73,12 +73,21 @@ void Enemy_Update()
 
 	Enemy_Control();
 
+	/*if (DethCheck() == true)
+	{
+		Deth();
+	}*/
+
 }
 
 //ƒvƒŒƒCƒ„[•`‰æˆ—
 void Enemy_Draw()
 {
 	DrawCircleAA(EnemyX,EnemyY, EnemyR, 100, 0xff0000, TRUE);
+	if (GetDeth() == true)
+	{
+		DrawFormatString(850, 250, GetColor(255, 255, 255), "deth");
+	}
 }
 
 
@@ -100,11 +109,23 @@ float GetEnemyR()
 	return EnemyR;
 }
 
+bool GetDeth()
+{
+	return Is_Deth;
+}
+
 bool DethCheck()
 {
-	if (HitCheck())
+	if (HitCheck()==true)
 	{
 		Is_Deth = true;
 	}
 	return Is_Deth;
+}
+
+void Deth()
+{
+	EnemyX = 0.0f;
+	EnemyY = 0.0f;
+	//Is_Deth == false;
 }

@@ -2,6 +2,7 @@
 #include "Collinder.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "Enemy.h"
 #include "DxLib.h"
 #include "math.h"
 
@@ -11,18 +12,16 @@ float BulletY;     //バレットのY座標
 float BulletR;     //バレットの半径
 float BulletSpeedX;     //バレットのX座標移動距離
 float BulletSpeedY;     //バレットのY座標移動距離
-float g;				//重力
 unsigned int BulletColor;     //バレットの色
 int ReflectionCount;	//反射回数
 bool Is_Delet;		//消滅フラグ
 
 //初期化処理
-void Bullet_Initialize(float x, float y)
+void Bullet_Initialize()
 {
-	BulletX = x;
-	BulletY = y;
+	BulletX = GetPlayerX();
+	BulletY = GetPlayerY();
 	BulletR = 20.0f;
-	g = 1.0f;
 	ReflectionCount = 0;	//反射回数
 	Is_Delet = false;
 
@@ -35,8 +34,8 @@ void Bullet_Initialize(float x, float y)
 		break;
 
 	case 2:
-		BulletSpeedX = 20.0f;
-		BulletSpeedY = 20.0f;
+		BulletSpeedX = 30.0f;
+		BulletSpeedY = 30.0f;
 		BulletColor = 0xff;     //バレットの色
 		break;
 	default:
@@ -48,7 +47,6 @@ void Bullet_Initialize(float x, float y)
 //更新処理
 void Bullet_Update(double r)
 {
-	
 	Bullet_Vector(r);
 	DeletCheck();
 
@@ -81,7 +79,7 @@ void Bullet_Update(double r)
 		//反射処理
 		if (BulletX + BulletR >= SCREEN_RIGHT)
 		{
-			ReflectionCount=6;
+			SetDelet(true);
 		}
 		if (BulletX - BulletR < SCREEN_LEFT)
 		{
@@ -99,16 +97,29 @@ void Bullet_Update(double r)
 	default:
 		break;
 	}
+
+	/*if (GetDeth() == true)
+	{
+		Delet();
+	}*/
 }
 
 //描画処理
 void Bullet_Draw()
 {
-	DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
+	if (Is_Delet==false)
+	{
+		DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
+	}
 
 	DrawFormatString(450, 50, GetColor(255, 255, 255), "反射回数：%d", ReflectionCount);
 	DrawFormatString(850, 50, GetColor(255, 255, 255), "x：%f", BulletX);
 	DrawFormatString(850, 100, GetColor(255, 255, 255), "y：%f", BulletY);
+	DrawFormatString(850, 150, GetColor(255, 255, 255), "flg：%d", Is_Delet);
+	if (HitCheck()==true)
+	{
+		DrawFormatString(850, 200, GetColor(255, 255, 255), "当たり");
+	}
 }
 
 
@@ -138,16 +149,24 @@ float GetBulletR()
 	return BulletR;
 }
 
-bool DeletCheck()
+bool GetDelet()
 {
-	if (HitCheck())
-	{
-		Is_Delet = true;
-	}
 	return Is_Delet;
 }
 
-void Delet()
+void SetDelet(int flg)
 {
+	Is_Delet = flg;
+}
 
+bool DeletCheck()
+{
+	if (HitCheck()==true)
+	{
+		if (GetType()==1)
+		{
+			SetDelet(true);
+		}
+	}
+	return Is_Delet;
 }
