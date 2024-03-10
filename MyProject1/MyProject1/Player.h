@@ -9,6 +9,7 @@ int GetType();		//タイプ受け取り処理
 float GetPlayerX();		//X座標取得
 float GetPlayerY();		//Y座標取得
 float GetPlayerR();		//半径取得
+float GetRadian();		//角度取得
 
 
 

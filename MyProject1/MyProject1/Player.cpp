@@ -4,6 +4,7 @@
 #include "Common.h"
 #include "InputControl.h"
 #include "Bullet.h"
+#include "Guide.h"
 #include"StageSelectScene.h"
 
 
@@ -70,6 +71,8 @@ void Player_Initialize()
 	type = 1;
 	//バレット初期化処理
 	Bullet_Initialize();
+	//ガイド初期化処理
+	Guide_Initialize();
 }
 
 //プレイヤー更新処理
@@ -113,7 +116,7 @@ void Player_Update()
 	//バレット更新処理
 	if (Is_Bullet==false)
 	{
-		Bullet_Update(Radian);
+		Bullet_Update();
 	}
 
 	//バレットが5回反射したら消える
@@ -135,19 +138,30 @@ void Player_Draw()
 {
 	//バレット描画処理
 	Bullet_Draw();
-
+	if (Is_Bullet==true)
+	{
+		Guide_Draw();
+	}
 	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
-	DrawFormatString(450, 100, GetColor(255, 255, 255), "θ ：%f", Degree);
-	DrawFormatString(450, 150, GetColor(255, 255, 255), "cos：%f", cos(Radian));
-	DrawFormatString(450, 200, GetColor(255, 255, 255), "sin：%f", sin(Radian));
-	DrawFormatString(450, 250, GetColor(255, 255, 255), "rad：%f", Radian);
-	DrawFormatString(450, 300, GetColor(255, 255, 255), "flg：%d", Is_Bullet);
-	DrawFormatString(450, 350, GetColor(255, 255, 255), "type：%d", type);
+	/*DrawFormatString(450, 50, GetColor(255, 255, 255), "θ ：%f", Degree);
+	DrawFormatString(450, 100, GetColor(255, 255, 255), "cos：%f", cos(Radian));
+	DrawFormatString(450, 150, GetColor(255, 255, 255), "sin：%f", sin(Radian));
+	DrawFormatString(450, 200, GetColor(255, 255, 255), "rad：%f", Radian);
+	DrawFormatString(450, 250, GetColor(255, 255, 255), "flg：%d", Is_Bullet);*/
+	DrawFormatString(450, 50, GetColor(255, 255, 255), "type：%d", type);
 }
 
 
 void Player_Control()
 {
+	if (GetButton(XINPUT_BUTTON_DPAD_LEFT) == TRUE && Is_Bullet == true)
+	{
+		PlayerX--;
+	}
+	if (GetButton(XINPUT_BUTTON_DPAD_RIGHT) == TRUE && Is_Bullet == true)
+	{
+		PlayerX++;
+	}
 	if (GetButton(XINPUT_BUTTON_DPAD_UP) == TRUE && Is_Bullet==true)
 	{
 		if (Degree >= 360)
@@ -197,4 +211,8 @@ float GetPlayerY()
 float GetPlayerR()
 {
 	return PlayerR;
+}
+float GetRadian()
+{
+	return Radian;
 }

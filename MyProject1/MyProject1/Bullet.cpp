@@ -21,7 +21,7 @@ void Bullet_Initialize()
 {
 	BulletX = GetPlayerX();
 	BulletY = GetPlayerY();
-	BulletR = 20.0f;
+	BulletR = 15.0f;
 	ReflectionCount = 0;	//反射回数
 	Is_Delet = false;
 
@@ -45,9 +45,9 @@ void Bullet_Initialize()
 
 
 //更新処理
-void Bullet_Update(double r)
+void Bullet_Update()
 {
-	Bullet_Vector(r);
+	Bullet_Vector();
 	DeletCheck();
 
 	switch (GetType())
@@ -112,22 +112,22 @@ void Bullet_Draw()
 		DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
 	}
 
-	DrawFormatString(450, 50, GetColor(255, 255, 255), "反射回数：%d", ReflectionCount);
-	DrawFormatString(850, 50, GetColor(255, 255, 255), "x：%f", BulletX);
+	DrawFormatString(450, 0, GetColor(255, 255, 255), "反射回数：%d", ReflectionCount);
+	/*DrawFormatString(850, 50, GetColor(255, 255, 255), "x：%f", BulletX);
 	DrawFormatString(850, 100, GetColor(255, 255, 255), "y：%f", BulletY);
 	DrawFormatString(850, 150, GetColor(255, 255, 255), "flg：%d", Is_Delet);
 	if (HitCheck()==true)
 	{
 		DrawFormatString(850, 200, GetColor(255, 255, 255), "当たり");
-	}
+	}*/
 }
 
 
 //移動処理
-void Bullet_Vector(double Radian)
+void Bullet_Vector()
 {
-	BulletX += BulletSpeedX * cos(Radian);
-	BulletY -= BulletSpeedY * sin(Radian);
+	BulletX += BulletSpeedX * cos(GetRadian());
+	BulletY -= BulletSpeedY * sin(GetRadian());
 }
 
 //反射回数取得処理

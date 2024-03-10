@@ -63,9 +63,8 @@ void GameMainScene_Update()
 void GameMainScene_Draw()
 {
 	SetFontSize(50);
-	DrawBox(0,0,SCREEN_WIDTH, SCREEN_HEIGHT,0xffffff,true);
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
-	DrawFormatString(0, 0, 0x0,"ステージ%d", GetStageNum());
+	DrawFormatString(0, 0, 0xffffff,"ステージ%d", GetStageNum());
 	Player_Draw();
 	Enemy_Draw();
 

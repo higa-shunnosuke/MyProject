@@ -122,7 +122,7 @@ void StageSelectScene_Update(void)
 void StageSelectScene_Draw(void)
 {
 	SetFontSize(50);
-	DrawFormatString(100, 100, GetColor(255, 255, 255), "ステージ%d", stage_number);
+	DrawFormatString(0, 0, GetColor(255, 255, 255), "ステージ%d", stage_number);
 }
 
 int GetStageNum()

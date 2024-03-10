@@ -64,6 +64,9 @@
     <ClCompile Include="Item.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Guide.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CreditScene.h">
@@ -118,6 +121,9 @@
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Item.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="Guide.h">
       <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>

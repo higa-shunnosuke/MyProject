@@ -138,6 +138,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="GameMainScene.cpp" />
     <ClCompile Include="GameoverScene.cpp" />
+    <ClCompile Include="Guide.cpp" />
     <ClCompile Include="HelpScene.cpp" />
     <ClCompile Include="InputControl.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="FreamControl.h" />
     <ClInclude Include="GameMainScene.h" />
     <ClInclude Include="GameoverScene.h" />
+    <ClInclude Include="Guide.h" />
     <ClInclude Include="HelpScene.h" />
     <ClInclude Include="InputControl.h" />
     <ClInclude Include="Item.h" />

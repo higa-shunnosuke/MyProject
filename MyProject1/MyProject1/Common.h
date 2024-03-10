@@ -13,8 +13,8 @@
 #define SCREEN_COLOBIT (32)
 #define FONT_SIZE (20)
 
-#define SCREEN_LEFT (50)
-#define SCREEN_RIGHT (1230)
-#define SCREEN_UPPER (50)
-#define SCREEN_UNDER (670)
+#define SCREEN_LEFT (0)
+#define SCREEN_RIGHT (1280)
+#define SCREEN_UPPER (0)
+#define SCREEN_UNDER (720)
 
