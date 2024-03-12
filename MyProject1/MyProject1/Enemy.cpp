@@ -71,7 +71,7 @@ void Enemy_Initialize()
 void Enemy_Update()
 {
 
-	Enemy_Control();
+	/*Enemy_Control();*/
 
 	/*if (DethCheck() == true)
 	{
