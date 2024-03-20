@@ -5,13 +5,20 @@
 #include "DxLib.h"
 #include "math.h"
 #include"StageSelectScene.h"
-#include"Collinder.h"
 
+typedef struct
+{
+	int type;
+	float x;
+	float y;
+	float r;
+}Enemy;
 
-float EnemyX;		//“G‚ÌXÀ•W
-float EnemyY;		//“G‚ÌYÀ•W
-float EnemyR;		//“G‚Ì”¼Œa
+//float EnemyX;		//“G‚ÌXÀ•W
+//float EnemyY;		//“G‚ÌYÀ•W
+//float EnemyR;		//“G‚Ì”¼Œa
 bool Is_Deth;		//€–Sƒtƒ‰ƒO
+Enemy enemy[10];
 
 //‰Šú‰»ˆ—
 void Enemy_Initialize()
@@ -19,94 +26,68 @@ void Enemy_Initialize()
 	switch (GetStageNum())
 	{
 	case 1:
-		EnemyX = 980.0f;
-		EnemyY = 645.0f;
-
+		enemy[0] = 
+		{1,980.0f,645.0f,25.0f};
+		enemy[1] = 
+		{1,980.0f,545.0f,25.0f};
 		break;
 	case 2:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+	
 		break;
 	case 3:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+		
 		break;
 	case 4:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+		
 		break;
 	case 5:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+	
 		break;
 	case 6:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+	
 		break;
 	case 7:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+	
 		break;
 	case 8:
-		EnemyX = 300.0f;
-		EnemyY = 645.0f;
-
+	
 		break;
 	default:
 		break;
 	}
 
-	EnemyR = 25.0f;
 	Is_Deth = false;
-
 }
 
 //ƒvƒŒƒCƒ„[XVˆ—
 void Enemy_Update()
 {
-
-	/*Enemy_Control();*/
-
-	/*if (DethCheck() == true)
-	{
-		Deth();
-	}*/
-
+	DethCheck();
 }
 
 //ƒvƒŒƒCƒ„[•`‰æˆ—
 void Enemy_Draw()
 {
-	DrawCircleAA(EnemyX,EnemyY, EnemyR, 100, 0xff0000, TRUE);
-	if (GetDeth() == true)
+	if (GetDeth() != true)
 	{
-		DrawFormatString(850, 250, GetColor(255, 255, 255), "deth");
+		for (int i = 0; i < 3; i++)
+		{
+			DrawCircleAA(enemy[i].x, enemy[i].y, enemy[i].r, 100, 0xff0000, TRUE);
+		}
 	}
-}
-
-
-void Enemy_Control()
-{
-	
 }
 
 float GetEnemyX()
 {
-	return EnemyX;
+	return enemy[1].x;
 }
 float GetEnemyY()
 {
-	return EnemyY;
+	return enemy[1].y;
 }
 float GetEnemyR()
 {
-	return EnemyR;
+	return enemy[1].r;
 }
 
 bool GetDeth()
@@ -119,13 +100,29 @@ bool DethCheck()
 	if (HitCheck()==true)
 	{
 		Is_Deth = true;
+		Deth();
 	}
 	return Is_Deth;
 }
 
 void Deth()
 {
-	EnemyX = 0.0f;
-	EnemyY = 0.0f;
+	enemy[1].x = 10.0f;
+	enemy[1].y = 10.0f;
 	//Is_Deth == false;
+}
+
+bool HitCheck()
+{
+	int ret = false;
+	double x = pow(GetBulletX() - GetEnemyX(), 2);
+	double y = pow(GetBulletY() - GetEnemyY(), 2);
+	double r = pow(GetBulletR() + GetEnemyR(), 2);
+
+	if (x + y < r)
+	{
+		ret = true;
+	}
+
+	return ret;
 }

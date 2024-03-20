@@ -5,7 +5,6 @@
 #include "Common.h"
 #include "Player.h"
 #include "Enemy.h"
-#include "Collinder.h"
 #include "DxLib.h"
 
 /****************************************************

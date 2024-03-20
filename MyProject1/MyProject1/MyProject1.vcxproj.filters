@@ -51,9 +51,6 @@
     <ClCompile Include="Player.cpp">
       <Filter>Object</Filter>
     </ClCompile>
-    <ClCompile Include="Collinder.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Object</Filter>
     </ClCompile>
@@ -109,9 +106,6 @@
       <Filter>Utility</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Object</Filter>
-    </ClInclude>
-    <ClInclude Include="Collinder.h">
       <Filter>Object</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">

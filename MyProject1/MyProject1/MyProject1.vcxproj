@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="Collinder.cpp" />
     <ClCompile Include="CreditScene.cpp" />
     <ClCompile Include="EndScene.cpp" />
     <ClCompile Include="Enemy.cpp" />
@@ -153,7 +152,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
-    <ClInclude Include="Collinder.h" />
     <ClInclude Include="Common.h" />
     <ClInclude Include="CreditScene.h" />
     <ClInclude Include="EndScene.h" />

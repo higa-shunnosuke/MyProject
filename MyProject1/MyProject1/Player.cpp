@@ -15,6 +15,7 @@ double Radian;		//ラジアン
 double Degree;		//角度
 bool Is_Bullet;		//バレットを生成可能か？
 int type;			//弾のタイプ
+int count;			//弾カウント
 
 //初期化処理
 void Player_Initialize()
@@ -69,6 +70,7 @@ void Player_Initialize()
 	Degree = 0.0f;
 	Is_Bullet = true;
 	type = 1;
+	count = 0;
 	//バレット初期化処理
 	Bullet_Initialize();
 	//ガイド初期化処理
@@ -111,6 +113,7 @@ void Player_Update()
 		SetBullet(false);
 		//バレット初期化処理
 		Bullet_Initialize();
+		count++;
 	}
 	
 	//バレット更新処理
@@ -149,6 +152,7 @@ void Player_Draw()
 	DrawFormatString(450, 200, GetColor(255, 255, 255), "rad：%f", Radian);
 	DrawFormatString(450, 250, GetColor(255, 255, 255), "flg：%d", Is_Bullet);*/
 	DrawFormatString(450, 50, GetColor(255, 255, 255), "type：%d", type);
+	DrawFormatString(450, 100, GetColor(255, 255, 255), "カウント：%d", count);
 }
 
 

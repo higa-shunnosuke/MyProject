@@ -1,5 +1,4 @@
 #include "Common.h"
-#include "Collinder.h"
 #include "Bullet.h"
 #include "Player.h"
 #include "Enemy.h"
@@ -14,6 +13,7 @@ float BulletSpeedX;     //バレットのX座標移動距離
 float BulletSpeedY;     //バレットのY座標移動距離
 unsigned int BulletColor;     //バレットの色
 int ReflectionCount;	//反射回数
+int BulletCount;	//反射回数
 bool Is_Delet;		//消滅フラグ
 
 //初期化処理
@@ -22,7 +22,8 @@ void Bullet_Initialize()
 	BulletX = GetPlayerX();
 	BulletY = GetPlayerY();
 	BulletR = 15.0f;
-	ReflectionCount = 0;	//反射回数
+	ReflectionCount = 0;
+	BulletCount = 0;
 	Is_Delet = false;
 
 	switch (GetType())
@@ -32,7 +33,6 @@ void Bullet_Initialize()
 		BulletSpeedY = 20.0f;
 		BulletColor = 0xffffff;     //バレットの色
 		break;
-
 	case 2:
 		BulletSpeedX = 30.0f;
 		BulletSpeedY = 30.0f;
