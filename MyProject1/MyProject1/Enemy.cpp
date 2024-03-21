@@ -20,7 +20,7 @@ typedef struct
 bool Is_Deth;		//死亡フラグ
 Enemy enemy[10];
 
-//初期化処理
+//エネミー初期化処理
 void Enemy_Initialize()
 {
 	switch (GetStageNum())
@@ -29,7 +29,7 @@ void Enemy_Initialize()
 		enemy[0] = 
 		{1,980.0f,645.0f,25.0f};
 		enemy[1] = 
-		{1,980.0f,545.0f,25.0f};
+		{1,1080.0f,645.0f,25.0f};
 		break;
 	case 2:
 	
@@ -59,65 +59,71 @@ void Enemy_Initialize()
 	Is_Deth = false;
 }
 
-//プレイヤー更新処理
+//エネミー更新処理
 void Enemy_Update()
 {
-	DethCheck();
+	DamageCheck();
 }
 
-//プレイヤー描画処理
+//エネミー描画処理
 void Enemy_Draw()
 {
-	if (GetDeth() != true)
-	{
 		for (int i = 0; i < 3; i++)
 		{
 			DrawCircleAA(enemy[i].x, enemy[i].y, enemy[i].r, 100, 0xff0000, TRUE);
 		}
-	}
 }
 
-float GetEnemyX()
+float GetEnemyX(int i)
 {
-	return enemy[1].x;
+	return enemy[i].x;
 }
-float GetEnemyY()
+float GetEnemyY(int i)
 {
-	return enemy[1].y;
+	return enemy[i].y;
 }
-float GetEnemyR()
+float GetEnemyR(int i)
 {
-	return enemy[1].r;
-}
-
-bool GetDeth()
-{
-	return Is_Deth;
+	return enemy[i].r;
 }
 
-bool DethCheck()
+//bool GetDeth()
+//{
+//	return Is_Deth;
+//}
+
+void DamageCheck()
 {
-	if (HitCheck()==true)
+	for (int i = 0; i < 3; i++)
 	{
-		Is_Deth = true;
-		Deth();
+		if (HitCheck(i) == true)
+		{
+			if (enemy[i].type>0)
+			{
+				enemy[i].type--;
+				break;
+			}
+			else
+			{
+				Deth(i);
+			}
+		}
 	}
-	return Is_Deth;
 }
 
-void Deth()
+void Deth(int i)
 {
-	enemy[1].x = 10.0f;
-	enemy[1].y = 10.0f;
+	enemy[i].x = 10.0f;
+	enemy[i].y = 10.0f;
 	//Is_Deth == false;
 }
 
-bool HitCheck()
+bool HitCheck(int i)
 {
 	int ret = false;
-	double x = pow(GetBulletX() - GetEnemyX(), 2);
-	double y = pow(GetBulletY() - GetEnemyY(), 2);
-	double r = pow(GetBulletR() + GetEnemyR(), 2);
+	double x = pow(GetBulletX() - enemy[i].x, 2);
+	double y = pow(GetBulletY() - enemy[i].y, 2);
+	double r = pow(GetBulletR() + enemy[i].r, 2);
 
 	if (x + y < r)
 	{

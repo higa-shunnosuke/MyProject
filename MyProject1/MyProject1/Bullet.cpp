@@ -161,12 +161,17 @@ void SetDelet(int flg)
 
 bool DeletCheck()
 {
-	if (HitCheck()==true)
+	for (int i = 0; i < 3; i++)
 	{
-		if (GetType()==1)
+		if (HitCheck(i) == true)
 		{
-			SetDelet(true);
+			if (GetType() == 1)
+			{
+				SetDelet(true);
+				break;
+			}
 		}
 	}
+	
 	return Is_Delet;
 }

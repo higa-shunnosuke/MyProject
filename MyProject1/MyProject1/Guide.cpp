@@ -10,6 +10,7 @@ float GuideY;		//ラインのY
 float GuideR;		//ラインの幅
 float Guidelength;	//ラインの長さ
 unsigned int GuideColor;		//ラインの色
+int Is_guide;
 
 void Guide_Initialize()
 {
@@ -18,29 +19,38 @@ void Guide_Initialize()
 	GuideR = 1.0f;
 	Guidelength = 1300.f;
 	GuideColor = 0x00ff00;
+	Is_guide=0;
 }
 
 void Guide_Draw()
 {
+	Is_guide = 0;
 	for (float i = 0; i < Guidelength; i++)
 	{
 		GuideX = GetPlayerX() + (cos(-GetRadian())) * i;
 		GuideY = GetPlayerY() + (sin(-GetRadian())) * i;
 		DrawCircleAA(GuideX, GuideY, GuideR, 100, GuideColor, TRUE);
-		if (LengthCheck() == true)
+		for (int i = 0; i < 3; i++)
+		{
+			if (LengthCheck(i) == true)
+			{
+				Is_guide=1;
+				break;
+			}
+		}
+		if (Is_guide==1)
 		{
 			break;
 		}
 	}
-	//DrawFormatString(850, 250, GetColor(255, 255, 255), "Line");
 }
 
-bool LengthCheck()
+bool LengthCheck(int i)
 {
 	int ret = false;
-	double x = pow(GuideX - GetEnemyX(), 2);
-	double y = pow(GuideY - GetEnemyY(), 2);
-	double r = pow( + GetEnemyR(), 2);
+	double x = pow(GuideX - GetEnemyX(i), 2);
+	double y = pow(GuideY - GetEnemyY(i), 2);
+	double r = pow( + GetEnemyR(i), 2);
 
 	if (x + y < r)
 	{
