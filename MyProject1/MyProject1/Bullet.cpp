@@ -107,10 +107,10 @@ void Bullet_Update()
 //•`‰æˆ—
 void Bullet_Draw()
 {
-	if (Is_Delet==false)
-	{
+	/*if (Is_Delet==false)
+	{*/
 		DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
-	}
+	/*}*/
 
 	DrawFormatString(450, 0, GetColor(255, 255, 255), "”½Ë‰ñ”F%d", ReflectionCount);
 	/*DrawFormatString(850, 50, GetColor(255, 255, 255), "xF%f", BulletX);

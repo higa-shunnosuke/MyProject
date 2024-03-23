@@ -18,7 +18,7 @@ typedef struct
 //float EnemyY;		//敵のY座標
 //float EnemyR;		//敵の半径
 bool Is_Deth;		//死亡フラグ
-Enemy enemy[10];
+Enemy enemy[3];
 
 //エネミー初期化処理
 void Enemy_Initialize()
@@ -29,7 +29,7 @@ void Enemy_Initialize()
 		enemy[0] = 
 		{1,980.0f,645.0f,25.0f};
 		enemy[1] = 
-		{1,1080.0f,645.0f,25.0f};
+		{2,1080.0f,645.0f,25.0f};
 		break;
 	case 2:
 	
@@ -87,11 +87,6 @@ float GetEnemyR(int i)
 	return enemy[i].r;
 }
 
-//bool GetDeth()
-//{
-//	return Is_Deth;
-//}
-
 void DamageCheck()
 {
 	for (int i = 0; i < 3; i++)
@@ -115,7 +110,6 @@ void Deth(int i)
 {
 	enemy[i].x = 10.0f;
 	enemy[i].y = 10.0f;
-	//Is_Deth == false;
 }
 
 bool HitCheck(int i)
