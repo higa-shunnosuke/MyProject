@@ -143,7 +143,6 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="FreamControl.cpp" />
-    <ClCompile Include="PauseScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResultScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -163,7 +162,6 @@
     <ClInclude Include="HelpScene.h" />
     <ClInclude Include="InputControl.h" />
     <ClInclude Include="Item.h" />
-    <ClInclude Include="PauseScene.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ResultScene.h" />
     <ClInclude Include="SceneManager.h" />

@@ -4,7 +4,6 @@
 #include"HelpScene.h"
 #include"CreditScene.h"
 #include"GameMainScene.h"
-#include"PauseScene.h"
 #include"ResultScene.h"
 #include"GameoverScene.h"
 #include"EndScene.h"
@@ -13,10 +12,9 @@
 /****************************************************
 *変数宣言
 *****************************************************/
-GAME_MODE game_mode;     //ゲームモード情報
-GAME_MODE next_mode;     //次のゲームモード
-int read_error;     //読み込みエラー確認
-static int stage_number;	//ステージナンバー
+GAME_MODE game_mode;	//ゲームモード情報
+GAME_MODE next_mode;	//次のゲームモード
+int read_error;			//読み込みエラー確認
 
 /****************************************************
 *シーン管理機能：初期化処理
@@ -42,9 +40,6 @@ void SceneManager_Initialize(GAME_MODE mode)
 		break;
 	case E_GAMEMAIN:
 		read_error = GameMainScene_Initialize();     //ゲームメイン画面の初期化
-		break;
-	case E_PAUSE:
-		read_error = PauseScene_Initialize();     //ポーズ画面の初期化
 		break;
 	case E_RESULT:
 		read_error = ResultScene_Initialize();     //リザルト画面の初期化
@@ -92,9 +87,6 @@ void SceneManager_Update(void)
 	case E_GAMEMAIN:
 		GameMainScene_Update();	//ゲームメイン画面の更新
 		break;
-	case E_PAUSE:
-		PauseScene_Update();	//ポーズ画面の更新
-		break;
 	case E_RESULT:
 		ResultScene_Update();     //リザルト画面の更新
 		break;
@@ -132,10 +124,6 @@ void SceneManager_Draw(void)
 		break;
 	case E_GAMEMAIN:
 		GameMainScene_Draw();	//ゲームメイン画面の描画
-		break;
-	case E_PAUSE:
-		GameMainScene_Draw();	//ゲームメイン画面の描画
-		PauseScene_Draw();	//ポーズ画面の描画
 		break;
 	case E_RESULT:
 		ResultScene_Draw();     //リザルト画面の描画

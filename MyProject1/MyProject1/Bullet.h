@@ -11,6 +11,3 @@ float GetBulletR();		//”¼Œaæ“¾
 bool GetDelet();		//Á–Åæ“¾
 void SetDelet(int flg);		//Á–Åƒtƒ‰ƒOİ’èˆ—
 bool DeletCheck();		//Á–Å”»’è
-void Delet();			//Á–Åˆ—
-
-

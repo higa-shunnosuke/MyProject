@@ -13,19 +13,21 @@
 #define WALL (50)
 
 /****************************************************
-*グローバル変数宣言
+*変数宣言
 *****************************************************/
-static int stage_number;
+int Is_Restart;		//リスタートするか？
 
 /****************************************************
-*タイトル画面：初期化処理
+*ゲームメイン画面：初期化処理
 * 引　数：なし
 * 戻り値：エラー情報（-1;異常有-1以外;正常終了）
 *****************************************************/
 int GameMainScene_Initialize()
 {
-		Player_Initialize();
-		Enemy_Initialize();
+	Is_Restart = 1;
+
+	Player_Initialize();
+	Enemy_Initialize();
 	
 	int ret = 0;
 
@@ -33,23 +35,40 @@ int GameMainScene_Initialize()
 }
 
 /****************************************************
-*タイトル画面：更新処理
+*ゲームメイン画面：更新処理
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
 void GameMainScene_Update()
 {
-	Player_Update();
-	Enemy_Update();
-
-	if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
+	if(Is_Restart == 1)
 	{
-		Change_Scene(E_PAUSE);
+		Player_Update();
+		Enemy_Update();
+		if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
+		{
+			Is_Restart = 0;
+		}
+	}
+	else
+	{
+		if (GetButtonDown(XINPUT_BUTTON_START) == TRUE)
+		{
+			Is_Restart = 1;
+		}
+		if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
+		{
+			GameMainScene_Initialize();
+		}
+		if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
+		{
+			Change_Scene(E_STAGESELECT);
+		}
 	}
 }
 
 /****************************************************
-*タイトル画面：初期化処理
+*ゲームメイン画面：初期化処理
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
@@ -58,7 +77,10 @@ void GameMainScene_Draw()
 	SetFontSize(50);
 	DrawBox(SCREEN_LEFT,SCREEN_UPPER,SCREEN_RIGHT, SCREEN_UNDER,0x0,true);
 	DrawFormatString(0, 0, 0xffffff,"ステージ%d", GetStageNum());
+	if (Is_Restart == 0)
+	{
+		DrawString(100, 100, "PAUSE", GetColor(255, 255, 255));
+	}
 	Player_Draw();
 	Enemy_Draw();
-
 }

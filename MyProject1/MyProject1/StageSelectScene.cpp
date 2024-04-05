@@ -21,15 +21,13 @@ static int stage_number=1;
 static int sounds[E_SOUND_MAX];
 
 /****************************************************
-*タイトル画面：初期化処理
+*ステージ選択画面：初期化処理
 * 引　数：なし
 * 戻り値：エラー情報（-1;異常有-1以外;正常終了）
 *****************************************************/
 int StageSelectScene_Initialize(void)
 {
 	int ret = 0;
-
-	//cursor_number = 0;
 
 	sounds[E_STAGE_BGM] = LoadSoundMem("sounds/BGM041.ogg");
 	sounds[E_STAGE_SE_CURSOR] = LoadSoundMem("sounds/SE1.mp3");
@@ -50,25 +48,16 @@ int StageSelectScene_Initialize(void)
 }
 
 /****************************************************
-*タイトル画面：更新処理
+*ステージ選択画面：更新処理
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
 void StageSelectScene_Update(void)
 {
 	//BGMが流れてないときに再生
-	/*if (CheckSoundMem(sounds[E_TITLE_BGM])!=TRUE)
+	if (CheckSoundMem(sounds[E_STAGE_BGM])!=TRUE)
 	{
-		PlaySoundMem(sounds[E_TITLE_BGM], DX_PLAYTYPE_BACK, FALSE);
-	}*/
-
-	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
-	{
-		//StopSoundMem(sounds[E_STAGE_BGM]);
-		PlaySoundMem(sounds[E_STAGE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
-		
-		Change_Scene(E_GAMEMAIN);
-
+		PlaySoundMem(sounds[E_STAGE_BGM], DX_PLAYTYPE_BACK, FALSE);
 	}
 
 	if (GetButtonDown(XINPUT_BUTTON_DPAD_LEFT) == TRUE)
@@ -81,7 +70,6 @@ void StageSelectScene_Update(void)
 		else
 		{
 			stage_number--;
-
 		}
 	}
 
@@ -95,8 +83,15 @@ void StageSelectScene_Update(void)
 		else
 		{
 			stage_number++;
-
 		}
+	}
+
+	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
+	{
+		StopSoundMem(sounds[E_STAGE_BGM]);
+		PlaySoundMem(sounds[E_STAGE_SE_SELECT], DX_PLAYTYPE_BACK, FALSE);
+
+		Change_Scene(E_GAMEMAIN);
 	}
 
 	if (GetButtonDown(XINPUT_BUTTON_B) == TRUE)
@@ -106,7 +101,7 @@ void StageSelectScene_Update(void)
 }
 
 /****************************************************
-*タイトル画面：描画処理
+*ステージ選択画面：描画処理
 * 引　数：なし
 * 戻り値：なし
 *****************************************************/
@@ -116,6 +111,11 @@ void StageSelectScene_Draw(void)
 	DrawFormatString(0, 0, GetColor(255, 255, 255), "ステージ%d", stage_number);
 }
 
+/****************************************************
+*ステージ選択画面：ステージ番号取得処理
+* 引　数：なし
+* 戻り値：なし
+*****************************************************/
 int GetStageNum()
 {
 	return stage_number;

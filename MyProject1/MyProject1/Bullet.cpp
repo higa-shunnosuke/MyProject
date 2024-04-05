@@ -97,29 +97,13 @@ void Bullet_Update()
 	default:
 		break;
 	}
-
-	/*if (GetDeth() == true)
-	{
-		Delet();
-	}*/
 }
 
 //描画処理
 void Bullet_Draw()
 {
-	/*if (Is_Delet==false)
-	{*/
-		DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
-	/*}*/
-
+	DrawCircleAA(BulletX, BulletY, BulletR, 100, BulletColor, TRUE);
 	DrawFormatString(450, 0, GetColor(255, 255, 255), "反射回数：%d", ReflectionCount);
-	/*DrawFormatString(850, 50, GetColor(255, 255, 255), "x：%f", BulletX);
-	DrawFormatString(850, 100, GetColor(255, 255, 255), "y：%f", BulletY);
-	DrawFormatString(850, 150, GetColor(255, 255, 255), "flg：%d", Is_Delet);
-	if (HitCheck()==true)
-	{
-		DrawFormatString(850, 200, GetColor(255, 255, 255), "当たり");
-	}*/
 }
 
 

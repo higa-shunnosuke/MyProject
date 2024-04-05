@@ -146,11 +146,6 @@ void Player_Draw()
 		Guide_Draw();
 	}
 	DrawCircleAA(PlayerX, PlayerY, PlayerR, 100, 0xffffff, TRUE);
-	/*DrawFormatString(450, 50, GetColor(255, 255, 255), "θ ：%f", Degree);
-	DrawFormatString(450, 100, GetColor(255, 255, 255), "cos：%f", cos(Radian));
-	DrawFormatString(450, 150, GetColor(255, 255, 255), "sin：%f", sin(Radian));
-	DrawFormatString(450, 200, GetColor(255, 255, 255), "rad：%f", Radian);
-	DrawFormatString(450, 250, GetColor(255, 255, 255), "flg：%d", Is_Bullet);*/
 	DrawFormatString(450, 50, GetColor(255, 255, 255), "type：%d", type);
 	DrawFormatString(450, 100, GetColor(255, 255, 255), "カウント：%d", count);
 }

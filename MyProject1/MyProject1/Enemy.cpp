@@ -19,6 +19,7 @@ typedef struct
 //float EnemyR;		//敵の半径
 bool Is_Deth;		//死亡フラグ
 Enemy enemy[3];
+int HitCount;		//ヒット回数
 
 //エネミー初期化処理
 void Enemy_Initialize()
@@ -27,9 +28,9 @@ void Enemy_Initialize()
 	{
 	case 1:
 		enemy[0] = 
-		{1,980.0f,645.0f,25.0f};
+		{0,980.0f,645.0f,25.0f};
 		enemy[1] = 
-		{2,1080.0f,645.0f,25.0f};
+		{1,1080.0f,645.0f,25.0f};
 		break;
 	case 2:
 	
@@ -56,6 +57,7 @@ void Enemy_Initialize()
 		break;
 	}
 
+	HitCount = 0;
 	Is_Deth = false;
 }
 
@@ -68,9 +70,16 @@ void Enemy_Update()
 //エネミー描画処理
 void Enemy_Draw()
 {
-		for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
 		{
-			DrawCircleAA(enemy[i].x, enemy[i].y, enemy[i].r, 100, 0xff0000, TRUE);
+			if (enemy[j].type>0)
+			{
+				DrawCircleAA(enemy[j].x, enemy[j].y, enemy[j].r, 100, 0xfff000, TRUE);
+			}
+			else
+			{
+				DrawCircleAA(enemy[j].x, enemy[j].y, enemy[j].r, 100, 0xff0000, TRUE);
+			}
 		}
 }
 
@@ -96,11 +105,23 @@ void DamageCheck()
 			if (enemy[i].type>0)
 			{
 				enemy[i].type--;
+				if (GetType() == 1)
+				{
+					Bullet_Initialize();
+				}
+				else
+				{
+					HitCount = 1;
+				}
 				break;
 			}
 			else
 			{
 				Deth(i);
+				if (GetType() == 1)
+				{
+					Bullet_Initialize();
+				}
 			}
 		}
 	}

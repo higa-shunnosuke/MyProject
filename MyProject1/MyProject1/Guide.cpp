@@ -4,12 +4,11 @@
 #include "DxLib.h"
 #include "math.h"
 
-
 float GuideX;		//ラインのX
 float GuideY;		//ラインのY
 float GuideR;		//ラインの幅
 float Guidelength;	//ラインの長さ
-unsigned int GuideColor;		//ラインの色
+unsigned int GuideColor;	//ラインの色
 int Is_guide;
 
 void Guide_Initialize()

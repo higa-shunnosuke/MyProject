@@ -27,9 +27,6 @@
     <ClCompile Include="HelpScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="PauseScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
     <ClCompile Include="ResultScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -79,9 +76,6 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="GameoverScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="PauseScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="ResultScene.h">
