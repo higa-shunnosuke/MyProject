@@ -7,17 +7,23 @@
 #include "Guide.h"
 #include"StageSelectScene.h"
 
-
+/****************************************************
+*変数宣言
+*****************************************************/
 float PlayerX;		//プレイヤーのX座標
 float PlayerY;		//プレイヤーのY座標
 float PlayerR;		//プレイヤーの半径
 double Radian;		//ラジアン
 double Degree;		//角度
-bool Is_Bullet;		//バレットを生成可能か？
+bool Is_Bullet;		//バレットを生成可能か？(true:可能,false:不可能)
 int type;			//弾のタイプ
 int count;			//弾カウント
 
-//初期化処理
+/****************************************************
+*プレイヤー：初期化処理
+* 引　数：なし
+* 戻り値：なし
+*****************************************************/
 void Player_Initialize()
 {
 	switch (GetStageNum())
@@ -71,76 +77,85 @@ void Player_Initialize()
 	Is_Bullet = true;
 	type = 1;
 	count = 0;
-	//バレット初期化処理
-	Bullet_Initialize();
-	//ガイド初期化処理
-	Guide_Initialize();
+	
+	Bullet_Initialize();	//バレット初期化処理
+	Guide_Initialize();		//ガイド初期化処理
 }
 
-//プレイヤー更新処理
+/****************************************************
+*プレイヤー：更新処理
+* 引　数：なし
+* 戻り値：なし
+*****************************************************/
 void Player_Update()
 {
-
-	Player_Control();
-
 	//タイプ変更
-	if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE && Is_Bullet == true)
+	if (Is_Bullet == true)	//発射可能なら
 	{
-		if (type>1)
+		Player_Control();	//発射角度操作処理
+
+		//左ショルダーが押されたら、typeを減らす
+		if (GetButtonDown(XINPUT_BUTTON_LEFT_SHOULDER) == TRUE)
 		{
-			type--;
+			if (type > 1)
+			{
+				type--;
+			}
+			else
+			{
+				type = 2;
+			}
 		}
-		else
+		//右ショルダーが押されたら、typeを増やす
+		if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE)
 		{
-			type = 2;
+			if (type < 2)
+			{
+				type++;
+			}
+			else
+			{
+				type = 1;
+			}
+		}
+		//Aボタンが押されたら、弾を発射
+		if (GetButtonDown(XINPUT_BUTTON_A) == TRUE)
+		{
+			SetBullet(false);	//発射フラグをfalseにする
+			
+			Bullet_Initialize();	//バレット初期化処理
 		}
 	}
-	if (GetButtonDown(XINPUT_BUTTON_RIGHT_SHOULDER) == TRUE && Is_Bullet == true)
+	else	//弾が発射中なら
 	{
-		if (type < 2)
-		{
-			type++;
-		}
-		else
-		{
-			type = 1;
-		}
+		Bullet_Update();	//バレット更新処理
 	}
 
-	//バレット発射
-	if (GetButtonDown(XINPUT_BUTTON_A) == TRUE && Is_Bullet == true)
-	{
-		SetBullet(false);
-		//バレット初期化処理
-		Bullet_Initialize();
-		count++;
-	}
-	
-	//バレット更新処理
-	if (Is_Bullet==false)
-	{
-		Bullet_Update();
-	}
-
-	//バレットが5回反射したら消える
+	//弾が5回反射したら消える
 	if (GetBRC() > 5)
 	{
-		SetBullet(true);
+		SetBullet(true);	//発射フラグをtrueにする
 
 		//バレット初期化処理
 		Bullet_Initialize();
 	}
+	//弾が物体に当たると消える
 	else if (GetDelet()==true)
 	{
-		SetBullet(true);
+		SetBullet(true);	//発射フラグをtrueにする
 	}
 }
 
-//プレイヤー描画処理
+/****************************************************
+*プレイヤー：描画処理
+* 引　数：なし
+* 戻り値：なし
+*****************************************************/
 void Player_Draw()
 {
-	//バレット描画処理
-	Bullet_Draw();
+	Bullet_Draw();	//バレット描画処理
+
+	//弾が発射中ならガイド線を描画
 	if (Is_Bullet==true)
 	{
 		Guide_Draw();
@@ -150,18 +165,23 @@ void Player_Draw()
 	DrawFormatString(450, 100, GetColor(255, 255, 255), "カウント：%d", count);
 }
 
-
+/****************************************************
+*プレイヤー：発射角度操作処理
+* 引　数：なし
+* 戻り値：なし
+*****************************************************/
 void Player_Control()
 {
-	if (GetButton(XINPUT_BUTTON_DPAD_LEFT) == TRUE && Is_Bullet == true)
+	if (GetButton(XINPUT_BUTTON_DPAD_LEFT) == TRUE)
 	{
 		PlayerX--;
 	}
-	if (GetButton(XINPUT_BUTTON_DPAD_RIGHT) == TRUE && Is_Bullet == true)
+	if (GetButton(XINPUT_BUTTON_DPAD_RIGHT) == TRUE)
 	{
 		PlayerX++;
 	}
-	if (GetButton(XINPUT_BUTTON_DPAD_UP) == TRUE && Is_Bullet==true)
+	//上ボタンを押したら、角度を大きくする
+	if (GetButton(XINPUT_BUTTON_DPAD_UP) == TRUE)
 	{
 		if (Degree >= 360)
 		{
@@ -172,7 +192,8 @@ void Player_Control()
 			Degree++;
 		}
 	}
-	if (GetButton(XINPUT_BUTTON_DPAD_DOWN) == TRUE && Is_Bullet==true)
+	//下ボタンを押したら、角度を小さくする
+	if (GetButton(XINPUT_BUTTON_DPAD_DOWN) == TRUE)
 	{
 		if (Degree <= 0)
 		{
@@ -183,34 +204,61 @@ void Player_Control()
 			Degree--;
 		}
 	}
+	//角度をラジアンに変換
 	Radian = Degree * (M_PI / 180);
 }
 
-//バレットフラグ設定処理(true=撃てる,false=撃てない)
+/****************************************************
+*プレイヤー：フラグ設定処理
+* 引　数：flg(true=撃てる,false=撃てない)
+* 戻り値：なし
+*****************************************************/
 void SetBullet(bool flg)
 {
 	Is_Bullet = flg;
-
 }
 
-//タイプ取得処理
+/****************************************************
+*プレイヤー：タイプ取得処理
+* 引　数：なし
+* 戻り値：type(反射弾or貫通弾)
+*****************************************************/
 int GetType()
 {
 	return type;
 }
-
+/****************************************************
+*プレイヤー：X座標取得処理
+* 引　数：なし
+* 戻り値：X座標
+*****************************************************/
 float GetPlayerX()
 {
 	return PlayerX;
 }
+/****************************************************
+*プレイヤー：Y座標取得処理
+* 引　数：なし
+* 戻り値：Y座標
+*****************************************************/
 float GetPlayerY()
 {
 	return PlayerY;
 }
+/****************************************************
+*プレイヤー：半径取得処理
+* 引　数：なし
+* 戻り値：半径
+*****************************************************/
 float GetPlayerR()
 {
 	return PlayerR;
 }
+/****************************************************
+*プレイヤー：ラジアン取得処理
+* 引　数：なし
+* 戻り値：ラジアン
+*****************************************************/
 float GetRadian()
 {
 	return Radian;
